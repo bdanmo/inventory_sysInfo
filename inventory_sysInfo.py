@@ -2,24 +2,18 @@ import os
 import subprocess
 from pathlib import Path
 
-
-def format_size(size):
+def format_size(size, device):
 	for unit in ['B','kB','MB','GB','TB','PB']:
-		if size < 1024.0:
-			return F"{round(size, 1)}{unit}"
-		size /= 1024.0
-
-def round_RAM(RAM):
-	intRAM = int(round(RAM, 0))
-	while intRAM % 4 != 0:
-		intRAM +=1
-	return intRAM
-
-def round_HD(HD):
-	intHD = int(round(HD, 0))
-	while intHD % 8 != 0 and intHD % 10 != 0:
-		intHD += 1
-	return intHD
+		if size < 1024:
+			size_int = round(size, 0)
+			if device == "RAM":
+				while size_int % 4 != 0:
+					size_int += 1
+			elif device == "HD":
+				while size_int % 8 != 0 and size_int % 10 != 0:
+					size_int += 1
+			return F"{int(size_int)}{unit}"
+		size /= 1024
 
 
 d1 = subprocess.check_output("wmic bios get serialnumber", shell=True).decode("utf-8")
@@ -38,8 +32,8 @@ Size = d4.replace("\r", "").strip().split('\n')[-1]
 buffer = [
 	F"SerialNumber:        {SerialNumber}",
 	F"Make/Model:          {Manufacturer} {Model}",
-	F"TotalPhysicalMemory: {format_size(int(TotalPhysicalMemory))}",
-	F"Size:                {format_size(int(Size))}"
+	F"TotalPhysicalMemory: {format_size(int(TotalPhysicalMemory), 'RAM')}",
+	F"Size:                {format_size(int(Size), 'HD')}",
 	F"Hostname:            {Hostname}",
 	F"User:                {os.getlogin()}"
 ]
