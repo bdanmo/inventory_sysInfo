@@ -9,7 +9,17 @@ def format_size(size):
 			return F"{round(size, 1)}{unit}"
 		size /= 1024.0
 
+def round_RAM(RAM):
+	intRAM = int(round(RAM, 0))
+	while intRAM % 4 != 0:
+		intRAM +=1
+	return intRAM
 
+def round_HD(HD):
+	intHD = int(round(HD, 0))
+	while intHD % 8 != 0 and intHD % 10 != 0:
+		intHD += 1
+	return intHD
 
 
 d1 = subprocess.check_output("wmic bios get serialnumber", shell=True).decode("utf-8")
