@@ -38,4 +38,4 @@ buffer = [
 	F"User:                {os.getlogin()}"
 ]
 
-Path.cwd().joinpath(F"{os.getlogin()}_results.txt").write_text("\n".join(buffer))
+Path.cwd().joinpath(F"{SerialNumber}_results.txt").write_text("\n".join(buffer))
