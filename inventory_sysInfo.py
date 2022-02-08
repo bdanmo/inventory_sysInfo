@@ -3,7 +3,7 @@ import subprocess
 from pathlib import Path
 
 def format_size(size, device):
-	for unit in ['B','kB','MB','GB','TB','PB']:
+	for unit in ['B','KB','MB','GB','TB','PB']:
 		if size < 1024:
 			size_int = round(size, 0)
 			if device == "RAM":
