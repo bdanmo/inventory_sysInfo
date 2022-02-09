@@ -22,11 +22,11 @@ d1 = subprocess.check_output("wmic bios get serialnumber", shell=True).decode("u
 d2 = subprocess.check_output("wmic csproduct get name & hostname", shell=True).decode("utf-8")
 d3 = subprocess.check_output("wmic computersystem get totalphysicalmemory", shell=True).decode("utf-8")
 d4 = subprocess.check_output("wmic diskdrive get size", shell=True).decode("utf-8")
-d5 = subprocess.check_output('systeminfo | find "System Manufacturer"', shell=True).decode("utf-8")
+d5 = subprocess.check_output("wmic computersystem get manufacturer", shell=True).decode("utf-8")
 
 SerialNumber = d1.replace("\r", "").strip().split('\n')[-1]
 Model = d2.replace("\r", "").strip().split('\n')[1].strip()
-Manufacturer = d5.replace("\r", "").strip().split(':')[-1].strip()
+Manufacturer = d5.replace("\r", "").strip().split('\n')[-1].strip()
 Hostname = d2.replace("\r", "").strip().split('\n')[3]
 Memory = d3.replace("\r", "").strip().split('\n')[-1]
 Size = d4.replace("\r", "").strip().split('\n')[-1]
