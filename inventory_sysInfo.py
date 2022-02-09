@@ -2,6 +2,8 @@ import os
 import subprocess
 from pathlib import Path
 
+outputDir = Path("//DEV-DB/HMF Share/IT/inventory_sysInfo/output")
+
 def format_size(size, device):
 	for unit in ['B','KB','MB','GB','TB','PB']:
 		if size < 1024:
@@ -38,5 +40,4 @@ buffer = [
 	F"User:                {os.getlogin()}"
 ]
 
-print(Path.cwd())
-Path.cwd().joinpath(F"{SerialNumber}_results.txt").write_text("\n".join(buffer))
+outputDir.joinpath(F"{SerialNumber}_results.txt").write_text("\n".join(buffer))
