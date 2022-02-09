@@ -38,4 +38,5 @@ buffer = [
 	F"User:                {os.getlogin()}"
 ]
 
+print(Path.cwd())
 Path.cwd().joinpath(F"{SerialNumber}_results.txt").write_text("\n".join(buffer))
