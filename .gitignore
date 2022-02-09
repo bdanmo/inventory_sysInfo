@@ -1,1 +1,6 @@
 0_results.txt
+inventory_sysInfo.py
+inventory_sysInfo.spec
+__pycache__/inventory_sysInfo.cpython-38.pyc
+build/*
+dist/inventory_sysInfo.exe
