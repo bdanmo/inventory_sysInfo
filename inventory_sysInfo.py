@@ -1,8 +1,12 @@
 import os
 import subprocess
 from pathlib import Path
+from datetime import datetime
 
 outputDir = Path("//DEV-DB/HMF Share/IT/inventory_sysInfo/output")
+outputCSV = outputDir.joinpath("output.csv")
+now = datetime.now()
+nowStr = now.strftime("%d/%m/%Y %H:%M:%S")
 
 def format_size(size, device):
 	for unit in ['B','KB','MB','GB','TB','PB']:
@@ -32,12 +36,14 @@ Memory = d3.replace("\r", "").strip().split('\n')[-1]
 Size = d4.replace("\r", "").strip().split('\n')[-1]
 
 buffer = [
-	F"SerialNumber:        {SerialNumber}",
-	F"Description:         {Manufacturer} {Model}",
-	F"Memory:              {format_size(int(Memory), 'RAM')}",
-	F"DiskSize:            {format_size(int(Size), 'HD')}",
-	F"Hostname:            {Hostname}",
-	F"User:                {os.getlogin()}"
+	F"{SerialNumber}",
+	F"{Manufacturer} {Model}",
+	F"{format_size(int(Memory), 'RAM')}",
+	F"{format_size(int(Size), 'HD')}",
+	F"{Hostname}",
+	F"{os.getlogin()}",
+	F"{nowStr}"
 ]
 
-outputDir.joinpath(F"{SerialNumber}_results.txt").write_text("\n".join(buffer))
+with open(outputCSV, "a") as f:
+    f.write(F"\n{';'.join(buffer)}")
