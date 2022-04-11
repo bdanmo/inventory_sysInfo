@@ -3,7 +3,7 @@ import subprocess
 from pathlib import Path
 from datetime import datetime
 
-outputDir = Path("//DEV-DB/HMF Share/IT/inventory_sysInfo/output")
+outputDir = Path("redacted for security")
 outputCSV = outputDir.joinpath("output.csv")
 now = datetime.now()
 nowStr = now.strftime("%d/%m/%Y %H:%M:%S")
